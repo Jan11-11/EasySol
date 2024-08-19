@@ -7,7 +7,7 @@ export default class ServicesService {
   }
 
   static async del(id) {
-    const cls = await ServicesModel.del(id);
+    const cls = await ServicesModel.delete(id);
     return cls;
   }
   static async put(id,info) {

@@ -1,7 +1,7 @@
 // Local Modules
 import { PartnersService } from '../services';
 import { SuccessHandlerUtil } from '../utils';
-
+const HOST_OF_SERVER = process.env.HOST_OF_SERVER
 export default class PartnersController {
   static async get(req, res, next) {
     try {
@@ -11,7 +11,21 @@ export default class PartnersController {
       next(error);
     }
   }
-
+  static async addPicture(req, res, next) {
+    try {
+      const { file } = req;
+      const { originalname, filename, path } = file;
+      const dirname = `${HOST_OF_SERVER}/${path}`;
+      SuccessHandlerUtil.handleAdd(res, next, {
+        originalname,
+        filename,
+        dirname,
+        success: true,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
   static async del(req, res, next) {
     try {
       const { id } = req.params;
